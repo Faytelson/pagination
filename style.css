@@ -1,0 +1,62 @@
+*,
+*::before,
+*::after {
+    padding: 0;
+    margin: 0;
+}
+body {
+    background: rgba(204, 204, 204, 0.17);
+}
+.container {
+    width: 90%;
+    margin: 0 auto;
+    padding-bottom: 3em;
+}
+.title {
+    background: #eee;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    padding: 20px 0;
+    font-weight: 700;
+    font-size: 50px;
+}
+.card {
+    padding: 20px;
+    overflow: scroll;
+}
+.card__title {
+    font-size: 36px;
+    padding: 20px 0;
+}
+.card__date {
+    padding: 10px 0;
+    margin-bottom: 20px;
+}
+.card__description {
+    font-size: 18px;
+    line-height: 1;
+}
+.pagination {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background: #c7efef;
+}
+.pagination__list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    padding: 10px 0;
+}
+.pagination__link {
+    display: block;
+    padding: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    color: #000;
+    font-size: 20px;
+}
