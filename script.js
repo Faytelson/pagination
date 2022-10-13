@@ -39,7 +39,7 @@ class Card {
 }
 
 // fetch
-fetch(`https://candidate.scid.ru/api/books`)
+fetch(`http://candidate.scid.ru/api/books`)
     .then(response => response.json())
     .then(data => {
         for (let i = 1; i < data.result.links.length - 1; i++) {
@@ -64,7 +64,7 @@ function displayCards(array) {
 }
 
 function fetchPages(i) {
-    let promise2 = fetch(`https://candidate.scid.ru/api/books?page=${i + 1}`)
+    let promise2 = fetch(`http://candidate.scid.ru/api/books?page=${i + 1}`)
         .then(response => response.json())
         .then(pageData => {
             displayCards(pageData.result.data);
