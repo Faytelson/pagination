@@ -2,13 +2,11 @@ const listParent = document.querySelector(".card-list"),
     paginationParent = document.querySelector(".pagination__list");
 let paginatedItems,
     itemsPerPage = 2;
-
 class Link {
     constructor(index, parent) {
         this.index = index;
         this.parent = parent;
     }
-
     render() {
         let link = document.createElement('a');
         link.classList.add('pagination__link');
@@ -16,7 +14,6 @@ class Link {
         this.parent.append(link);
     }
 }
-
 class Card {
     constructor(title, date, description, parent) {
         this.title = title;
@@ -24,7 +21,6 @@ class Card {
         this.description = description;
         this.parent = parent;
     }
-
     render() {
         let listItem = document.createElement('div');
         listItem.classList.add('card');
@@ -36,32 +32,20 @@ class Card {
         this.parent.append(listItem);
     }
 }
-<<<<<<< HEAD
 let promise = fetch(`http://candidate.scid.ru/api/books`)
     .then(response => response.json())
     .then(data => {
-=======
-
-let promise = fetch(`http://candidate.scid.ru/api/books`)
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-        // displayCards(data.result.data.slice(0, itemsPerPage));
->>>>>>> 6fa93128c4ea2a5de13c20ddfd9d76a175eb3b81
-        for (let i = 0; i < data.result.links.length; i++) {
+        for (let i = 1; i < data.result.links.length - 1; i++) {
             new Link(i, paginationParent).render();
         }
+        displayCards(data.result.data);
         const links = document.querySelectorAll(".pagination__link");
         links.forEach((link, index) => {
             link.addEventListener('click', function (evt) {
                 evt.preventDefault();
-                let promise2 = fetch(`http://candidate.scid.ru/api/books?page=${index}`)
+                let promise2 = fetch(`http://candidate.scid.ru/api/books?page=${index + 1}`)
                     .then(response => response.json())
                     .then(pageData => {
-<<<<<<< HEAD
-=======
-                        console.log(index, pageData);
->>>>>>> 6fa93128c4ea2a5de13c20ddfd9d76a175eb3b81
                         displayCards(pageData.result.data);
                     });
             })

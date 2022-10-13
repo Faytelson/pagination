@@ -22,7 +22,6 @@ body {
 }
 .card {
     padding: 20px;
-    overflow: scroll;
 }
 .card__title {
     font-size: 36px;
