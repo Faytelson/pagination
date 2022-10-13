@@ -2,11 +2,14 @@ const listParent = document.querySelector(".card-list"),
     paginationParent = document.querySelector(".pagination__list");
 let paginatedItems,
     itemsPerPage = 2;
+
+// classes
 class Link {
     constructor(index, parent) {
         this.index = index;
         this.parent = parent;
     }
+
     render() {
         let link = document.createElement('a');
         link.classList.add('pagination__link');
@@ -14,6 +17,7 @@ class Link {
         this.parent.append(link);
     }
 }
+
 class Card {
     constructor(title, date, description, parent) {
         this.title = title;
@@ -21,6 +25,7 @@ class Card {
         this.description = description;
         this.parent = parent;
     }
+
     render() {
         let listItem = document.createElement('div');
         listItem.classList.add('card');
@@ -32,7 +37,9 @@ class Card {
         this.parent.append(listItem);
     }
 }
-let promise = fetch(`http://candidate.scid.ru/api/books`)
+
+// fetch
+fetch(`http://candidate.scid.ru/api/books`)
     .then(response => response.json())
     .then(data => {
         for (let i = 1; i < data.result.links.length - 1; i++) {
@@ -43,14 +50,12 @@ let promise = fetch(`http://candidate.scid.ru/api/books`)
         links.forEach((link, index) => {
             link.addEventListener('click', function (evt) {
                 evt.preventDefault();
-                let promise2 = fetch(`http://candidate.scid.ru/api/books?page=${index + 1}`)
-                    .then(response => response.json())
-                    .then(pageData => {
-                        displayCards(pageData.result.data);
-                    });
-            })
+                fetchPages(index);
+            });
         })
     });
+
+// callbacks
 function displayCards(array) {
     listParent.innerHTML = '';
     for (let i = 0; i < array.length; i++) {
@@ -58,5 +63,12 @@ function displayCards(array) {
     }
 }
 
+function fetchPages(i) {
+    let promise2 = fetch(`http://candidate.scid.ru/api/books?page=${i + 1}`)
+        .then(response => response.json())
+        .then(pageData => {
+            displayCards(pageData.result.data);
+        });
+}
 
 
