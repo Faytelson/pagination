@@ -36,12 +36,9 @@ class Card {
         this.parent.append(listItem);
     }
 }
-
 let promise = fetch(`http://candidate.scid.ru/api/books`)
     .then(response => response.json())
     .then(data => {
-        console.log(data);
-        // displayCards(data.result.data.slice(0, itemsPerPage));
         for (let i = 0; i < data.result.links.length; i++) {
             new Link(i, paginationParent).render();
         }
@@ -52,13 +49,11 @@ let promise = fetch(`http://candidate.scid.ru/api/books`)
                 let promise2 = fetch(`http://candidate.scid.ru/api/books?page=${index}`)
                     .then(response => response.json())
                     .then(pageData => {
-                        console.log(index, pageData);
                         displayCards(pageData.result.data);
                     });
             })
         })
     });
-
 function displayCards(array) {
     listParent.innerHTML = '';
     for (let i = 0; i < array.length; i++) {
