@@ -36,9 +36,18 @@ class Card {
         this.parent.append(listItem);
     }
 }
+<<<<<<< HEAD
 let promise = fetch(`http://candidate.scid.ru/api/books`)
     .then(response => response.json())
     .then(data => {
+=======
+
+let promise = fetch(`http://candidate.scid.ru/api/books`)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        // displayCards(data.result.data.slice(0, itemsPerPage));
+>>>>>>> 6fa93128c4ea2a5de13c20ddfd9d76a175eb3b81
         for (let i = 0; i < data.result.links.length; i++) {
             new Link(i, paginationParent).render();
         }
@@ -49,6 +58,10 @@ let promise = fetch(`http://candidate.scid.ru/api/books`)
                 let promise2 = fetch(`http://candidate.scid.ru/api/books?page=${index}`)
                     .then(response => response.json())
                     .then(pageData => {
+<<<<<<< HEAD
+=======
+                        console.log(index, pageData);
+>>>>>>> 6fa93128c4ea2a5de13c20ddfd9d76a175eb3b81
                         displayCards(pageData.result.data);
                     });
             })
