@@ -12,7 +12,7 @@ class Link {
     render() {
         let link = document.createElement('a');
         link.classList.add('pagination__link');
-        link.innerHTML = this.index + 1;
+        link.innerHTML = this.index;
         this.parent.append(link);
     }
 }
@@ -37,21 +37,24 @@ class Card {
     }
 }
 
-let promise = fetch("http://candidate.scid.ru/api/books?page=1")
+let promise = fetch(`http://candidate.scid.ru/api/books`)
     .then(response => response.json())
     .then(data => {
-        displayCards(data.result.data.slice(0, itemsPerPage));
-        for (let i = 0; i < data.result.data.length / itemsPerPage; i++) {
+        console.log(data);
+        // displayCards(data.result.data.slice(0, itemsPerPage));
+        for (let i = 0; i < data.result.links.length; i++) {
             new Link(i, paginationParent).render();
         }
         const links = document.querySelectorAll(".pagination__link");
         links.forEach((link, index) => {
             link.addEventListener('click', function (evt) {
                 evt.preventDefault();
-                let start = index * itemsPerPage;
-                let end = start + itemsPerPage;
-                paginatedItems = data.result.data.slice(start, end);
-                displayCards(paginatedItems);
+                let promise2 = fetch(`http://candidate.scid.ru/api/books?page=${index}`)
+                    .then(response => response.json())
+                    .then(pageData => {
+                        console.log(index, pageData);
+                        displayCards(pageData.result.data);
+                    });
             })
         })
     });
